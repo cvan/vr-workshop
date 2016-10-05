@@ -1,22 +1,12 @@
-*[id] {
-    margin-left: -1em;
-    padding-left: 1em;
-    position:relative;
-}
-a.ref {
-    color: #aaa;
-    display: none;
-    font-size: 1rem;
-    position: absolute;
-}
-
-a.ref.show {
-    display: block;
-    left: 0;
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
   background: #005A9C;
+  font-size: 14px;
   padding: 1em;
 }
 
@@ -31,8 +21,44 @@ body {
   padding: 1em 3em;
 }
 
-a, h1, h2 {
-  color: #005A9C;
+a,
+h1,
+h2 {
+  color: #005a9c;
+}
+
+a:hover {
+  color: #111;
+}
+
+a.ref,
+.has-ref {
+  cursor: pointer;
+}
+
+a.ref {
+  color: inherit;
+  display: none;
+  font-size: 1em;
+  left: 0;
+  opacity: .25;
+  position: absolute;
+  text-decoration: none;
+}
+
+.has-ref:hover > a.ref {
+  display: block;
+}
+
+.has-ref:target > a.ref {
+  display: block;
+  opacity: .5;
+}
+
+.has-ref {
+  margin-left: -1em;
+  padding-left: 1em;
+  position: relative;
 }
 
 .graphic {
@@ -101,41 +127,56 @@ footer {
 }
 
 .menu {
-  background: #005A9C;
-  border-collapse: collapse;
-  border: hidden;
-  display: table;
-  font-size: smaller;
-  font-weight: 700;
+  background: #005a9c;
+  font-size: 1rem;
   margin: 0 0 2em;
-  table-layout: fixed;
+}
+
+.menu,
+.menu ul,
+.menu li {
   width: 100%;
 }
 
-.menu li {
-  border: 1px solid #fff;
-  border-top: none;
-  display: table-cell;
-  padding: .3em .2em;
-  text-align: center;
-  vertical-align: middle;
+.menu ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li + li a {
+  border-left: 2px solid #fff;
 }
 
 .menu a {
   color: #eee;
   display: block;
+  height: 100%;
+  padding: .6rem .3rem;
+  text-align: center;
   text-decoration: none;
+  transition: .05s background ease-in-out, .05s color ease-in-out;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  width: 100%;
 }
 
 .menu a:hover {
-  background: #a2b3a1;
-  color: #000;
+  background: #111;
+  color: #fff;
+}
+
+.menu a:active {
+  opacity: .75;
 }
 
 .menu a.active-tab {
   background: #fff;
   color: #005a9c;
-  outline: #a2b3a1;
+  font-weight: bold;
 }
 
 ul {
@@ -170,9 +211,21 @@ address {
 }
 
 @media all and (max-width: 40em) {
-  /* The right-floating boxes become normal blocks. */
   body {
     padding: 1em;
+  }
+
+  .menu ul {
+    display: block;
+  }
+
+  .menu li + li a {
+    border-top: 2px solid #fff;
+    border-left: 0;
+  }
+
+  .menu li + li a {
+    margin-left: 0;
   }
 
   .graphic {
@@ -180,26 +233,15 @@ address {
     margin: 0;
   }
 
+  /* The right-floating boxes become normal blocks. */
   .box {
     float: none;
     margin-left: 0;
     width: auto;
   }
 
-  section h2 {
+  .main h2 {
     margin-top: 1.5em;
-  }
-
-  /* The horizontal menu becomes vertical. */
-  .menu ul {
-    display: block;
-    margin: 0;
-    padding: 0;
-  }
-
-  .menu li {
-    display: block;
-    border-style: none none solid;
   }
 }
 
@@ -315,7 +357,7 @@ td {
 @media print {
   h1 {
     background: none;
-    color: #000;
+    color: #111;
   }
 
   nav, aside {
